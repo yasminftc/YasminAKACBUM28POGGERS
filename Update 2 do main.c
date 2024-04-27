@@ -102,6 +102,20 @@ else if(BOLINHA == 2){
 	ST7735_WriteString(10,65,"2", Font_7x10, WHITE, BLACK);
 }
 }
+void setinhas (){
+if (BOTAO_ESQUERDO == 0){
+            opcao --;
+            }
+         if (BOTAO_DIREITO == 0){
+            opcao ++;
+            }
+	if (opcao < 0){
+	    opcao = 8;
+	}
+	else if (opcao > 8){
+	    opcao = 0;
+	}
+}
 /* USER CODE END 0 */
 
 /**
@@ -155,24 +169,19 @@ int main(void)
       while (BOLINHA != 2 || XIX != 2){
 
         //LIMPANDO O JOGO/ ZERANDO A TABELA
-          /*for (int i = 0; i < 4; i++){
-          for (int j = 0; j < 4; j++){
+       for (int i = 1; i < 4; i++){
+          for (int j = 1; j < 4; j++){
             matriz[i][j] = 0;
         }
-       } */
+       }
 
     	  while (true){
 
           //jogada XIX
         while (cont == 0){
 
-          if (BOTAO_ESQUERDO == 0){
-            opcao ++;
-            }
-           if (BOTAO_DIREITO == 0){
-            opcao ++;
-            }
-
+	setinhas();
+		
            if (QUADRADO_0 == 1){
         	ST7735_WriteString(CASA0,"x", Font_11x18, WHITE, BLACK);
            }
@@ -204,6 +213,8 @@ int main(void)
 
         //jogada bolinha
         while (cont == 1){
+		
+	setinhas();
 
                 if (BOTAO_ESQUERDO == 0){
                   opcao --;
@@ -221,7 +232,6 @@ int main(void)
                 HAL_Delay(1000);
              cont --;
               }
-
 
         }
     	}
